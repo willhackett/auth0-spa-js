@@ -48,10 +48,15 @@
         });
 
         $('#getTokenPopup').click(async () => {
-          const token = await auth0.getTokenWithPopup({
-            audience: 'https://brucke.auth0.com/api/v2/',
-            scope: 'read:rules'
-          });
+          const [token, token2] = await Promise.all([
+            auth0.getTokenSilently({ ignoreCache: true }),
+            auth0.getTokenSilently({
+              ignoreCache: true,
+              audience: 'https://brucke.auth0.com/api/v2/',
+              scope: 'read:rules'
+            })
+          ]);
+          console.log({ token, token2 });
         });
         $('#getUser').click(async () => {
           const user = await auth0.getUser();
