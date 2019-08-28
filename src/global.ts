@@ -231,11 +231,13 @@ interface OAuthTokenOptions {
  * @ignore
  */
 interface JWTVerifyOptions {
+  client_id: string;
   iss: string;
   aud: string;
   id_token: string;
   nonce?: string;
   leeway?: number;
+  max_age?: string;
 }
 
 /**
